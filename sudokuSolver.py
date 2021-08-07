@@ -32,8 +32,5 @@ def find_solution():
     return 1
 
 
-def find_empty_square():
-    return 1
-
 def is_Valid():
     return 1
