@@ -14,13 +14,26 @@ board = [
 ]
 
 
-for i in range(len(board)): 
-    if i % 3 == 0 and i != 0:
-        print("--------------------")
-    for j in range(len(board[0])):
 
-        if j % 3 == 0 and j != 0:
-            print("|", end= " ")
+def print_board(currBoard):
+    for i in range(len(currBoard)): 
+        if i % 3 == 0 and i != 0:
+            print("---------------------")
+            # print("_____________________")
+        for j in range(len(currBoard[0])):
 
-        print(str(board[i][j]) + " ", end = "")
-    print()
+            if j % 3 == 0 and j != 0:
+                print("|", end= " ")
+
+            print(str(currBoard[i][j]) + " ", end = "")
+        print()
+
+def find_solution():
+    return 1
+
+
+def find_empty_square():
+    return 1
+
+def is_Valid():
+    return 1
