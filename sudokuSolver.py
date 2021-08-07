@@ -32,5 +32,16 @@ def find_solution():
     return 1
 
 
-def is_Valid():
-    return 1
+def is_Valid(currBoard, currRow, currCol):
+
+    for col in range(0, 9): # Check if the value is valid in the current Row
+        if(col != currCol):
+            if(currBoard[currRow][col] == currBoard[currRow][currCol]):
+                return False
+    
+    for row in range(0,9): # Check if value is correct in current Column
+        if(row != currRow):
+            if(currBoard[row][currCol] == currBoard[currRow][currCol]):
+                return False
+
+    
