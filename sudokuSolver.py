@@ -1,6 +1,3 @@
-
-# Length of board is 9
-
 # board = [
 #     [0, 0, 0, 0, 0, 0, 0, 7, 9],
 #     [8, 0, 5, 0, 7, 4, 1, 0, 0],
@@ -41,6 +38,7 @@ def print_board(currBoard):
         print()
         
 
+
 def find_solution(board):
 
     empty_spot = findEmptySquare(board)
@@ -55,11 +53,6 @@ def find_solution(board):
         board[empty_spot[0]][empty_spot[1]] = 0
     return False
         
-
-        
-    
-
-
 
 def is_Valid(currBoard, currRow, currCol, num):
     # print(str(currRow) + " " + str(currCol))
