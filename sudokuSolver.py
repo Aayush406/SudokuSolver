@@ -38,9 +38,7 @@ def print_board(currBoard):
         print()
         
 
-
 def find_solution(board):
-
     empty_spot = findEmptySquare(board)
     if(empty_spot[0] == "Complete"):
         return True
