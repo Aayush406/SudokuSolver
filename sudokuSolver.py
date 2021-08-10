@@ -44,7 +44,7 @@ def find_solution(board):
         return True
 
     for num in range(1, 10):
-        if (is_Valid(board, empty_spot[0], empty_spot[1], num) == True):
+        if (check_spot(board, empty_spot[0], empty_spot[1], num) == True):
             board[empty_spot[0]][empty_spot[1]] = num
             if (find_solution(board) == True):
                 return True
@@ -52,7 +52,7 @@ def find_solution(board):
     return False
         
 
-def is_Valid(currBoard, currRow, currCol, num):
+def check_spot(currBoard, currRow, currCol, num):
     # print(str(currRow) + " " + str(currCol))
 
     for col in range(0, 9): # Check if the value is valid in the current Row
