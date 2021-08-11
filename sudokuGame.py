@@ -6,11 +6,24 @@ _FRAME_RATE = 10
 
 
 class SudokuGrid:
+    board = [
+        [0, 8, 0, 3, 7, 0, 0, 0, 0],
+        [0, 0, 3, 0, 0, 0, 0, 0, 0],
+        [0, 0, 7, 0, 4, 0, 2, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0, 0, 8],
+        [0, 0, 0, 0, 0, 0, 4, 3, 7],
+        [8, 0, 9, 0, 0, 0, 0, 0, 2],
+        [0, 0, 0, 8, 0, 0, 6, 0, 0],
+        [5, 6, 0, 0, 0, 9, 0, 0, 0],
+        [0, 0, 0, 0, 0, 2, 0, 4, 0]        
+    ]
 
     def __init__(self):
         self._SCREEN_HEIGHT = 800
         self._SCREEN_WIDTH = 800
         self._running = True
+        self._seperation_distance = self._SCREEN_WIDTH / 9
+        
 
 
     def run(self):
@@ -21,15 +34,32 @@ class SudokuGrid:
             self._create_surface((self._SCREEN_WIDTH, self._SCREEN_HEIGHT))
             
             while self._running:
+
                 clock.tick(_FRAME_RATE)
+
                 self._handle_events()
+
                 self._surface.fill((255,255,255))
+                self._draw_lines()
                 pygame.display.flip()
 
 
         
         finally:
             pygame.quit()
+
+
+    def _draw_lines(self):
+        for i in range(10):
+            if(i % 3 == 0):
+                pygame.draw.line(self._surface, (0, 0, 0), (0, i*self._seperation_distance), (self._SCREEN_WIDTH, i * self._seperation_distance), 8)
+                pygame.draw.line(self._surface, (0, 0, 0), (i * self._seperation_distance, 0), (i * self._seperation_distance, self._SCREEN_HEIGHT), 8)
+            else:
+                pygame.draw.line(self._surface, (0, 0, 0), (0, i*self._seperation_distance), (self._SCREEN_WIDTH, i * self._seperation_distance), 3)
+                pygame.draw.line(self._surface, (0, 0, 0), (i * self._seperation_distance, 0), (i * self._seperation_distance, self._SCREEN_HEIGHT), 3)
+            
+
+
 
 
 
@@ -68,6 +98,7 @@ class SudokuGrid:
             screen = pygame.display.set_mode(event.size, flags=pygame.RESIZABLE)
             self._SCREEN_WIDTH = event.size[0]
             self._SCREEN_HEIGHT = event.size[1]
+            self._seperation_distance = self._SCREEN_WIDTH / 9
 
             
     # def _handle_keys(self) -> None:
