@@ -2,7 +2,7 @@ import pygame
 
 
 
-_FRAME_RATE = 60
+_FRAME_RATE = 10
 
 
 class SudokuGrid:
