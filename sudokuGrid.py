@@ -83,6 +83,9 @@ class SudokuGrid:
                 self._draw_nums()
                 self._handle_events()
                 # self._displayCurrentBox()
+
+                if(self._autoSolve == True):
+                    pass
                 
                 if self._done == True and self._autoSolve == False:
                     self._mark_win()
@@ -103,9 +106,6 @@ class SudokuGrid:
 
 
     def _check_win(self):
-        # if(self._solved == False):
-        #     sudokuSolver.find_solution(self._solvedBoard)
-        #     self._solved = True
 
         for row in range(len(self._board)):
             for col in range(len(self._board[0])):
@@ -258,11 +258,14 @@ class SudokuGrid:
                 self._board[int(self._mouseY)][int(self._mouseX)] = 0
 
         if keys[pygame.K_RETURN]:
-            pass
+            self._autoSolve = True
 
 
         if self._check_filled():
             self._check_win()
+
+
+    
 
 
 if __name__ == '__main__':
