@@ -6,6 +6,10 @@ _FRAME_RATE = 10
 pygame.init()
 pygame.font.init()
 
+# lucidafax
+# gillsans
+# roboto
+
 class SudokuGrid:
 
 
@@ -14,58 +18,59 @@ class SudokuGrid:
         self._SCREEN_WIDTH = 800
         self._running = True
         self._seperation_distance = self._SCREEN_WIDTH / 9
-        self._font = pygame.font.SysFont("arial", 50)
-        self._smaller_font = pygame.font.SysFont("arial", 30)
+        self._font = pygame.font.SysFont("roboto", 50)
+        self._smaller_font = pygame.font.SysFont("Gillsans", 30)
         self._mouseX = 0
         self._mouseY = 0
         self._mouseClicked = False
         self._insertVal = 0
         self._done = False
-        self._once = False 
         self._autoSolve = False
+        self._backtrackingDone = False
+        self._acceptingClicks = True
         self._solved = False
         self._board = [
-                        [0, 8, 0, 3, 7, 0, 0, 0, 0],
-                        [0, 0, 3, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 7, 0, 4, 0, 2, 0, 0],
-                        [1, 0, 0, 0, 0, 0, 0, 0, 8],
-                        [0, 0, 0, 0, 0, 0, 4, 3, 7],
-                        [8, 0, 9, 0, 0, 0, 0, 0, 2],
-                        [0, 0, 0, 8, 0, 0, 6, 0, 0],
-                        [5, 6, 0, 0, 0, 9, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 2, 0, 4, 0]        
+                        [6, 4, 0, 0, 3, 0, 0, 0, 7],
+                        [5, 0, 1, 0, 7, 0, 9, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 1, 0],
+                        [0, 0, 4, 9, 0, 8, 0, 6, 0],
+                        [0, 8, 0, 0, 0, 3, 0, 2, 0],
+                        [0, 0, 0, 4, 0, 0, 0, 0, 0],
+                        [4, 0, 0, 1, 5, 7, 0, 3, 0],
+                        [2, 0, 8, 3, 0, 0, 0, 4, 0],
+                        [7, 5, 0, 0, 0, 0, 0, 9, 6]        
                     ]
         self._og_board = [
-                            [0, 8, 0, 3, 7, 0, 0, 0, 0],
-                            [0, 0, 3, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 7, 0, 4, 0, 2, 0, 0],
-                            [1, 0, 0, 0, 0, 0, 0, 0, 8],
-                            [0, 0, 0, 0, 0, 0, 4, 3, 7],
-                            [8, 0, 9, 0, 0, 0, 0, 0, 2],
-                            [0, 0, 0, 8, 0, 0, 6, 0, 0],
-                            [5, 6, 0, 0, 0, 9, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 2, 0, 4, 0]        
-                        ]
+                        [6, 4, 0, 0, 3, 0, 0, 0, 7],
+                        [5, 0, 1, 0, 7, 0, 9, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 1, 0],
+                        [0, 0, 4, 9, 0, 8, 0, 6, 0],
+                        [0, 8, 0, 0, 0, 3, 0, 2, 0],
+                        [0, 0, 0, 4, 0, 0, 0, 0, 0],
+                        [4, 0, 0, 1, 5, 7, 0, 3, 0],
+                        [2, 0, 8, 3, 0, 0, 0, 4, 0],
+                        [7, 5, 0, 0, 0, 0, 0, 9, 6]        
+                    ]
         
         self._solvedBoard = [
-                        [0, 8, 0, 3, 7, 0, 0, 0, 0],
-                        [0, 0, 3, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 7, 0, 4, 0, 2, 0, 0],
-                        [1, 0, 0, 0, 0, 0, 0, 0, 8],
-                        [0, 0, 0, 0, 0, 0, 4, 3, 7],
-                        [8, 0, 9, 0, 0, 0, 0, 0, 2],
-                        [0, 0, 0, 8, 0, 0, 6, 0, 0],
-                        [5, 6, 0, 0, 0, 9, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 2, 0, 4, 0]        
+                        [6, 4, 9, 8, 3, 1, 2, 5, 7],
+                        [5, 3, 1, 6, 7, 2, 9, 8, 4],
+                        [8, 2, 7, 5, 4, 9, 6, 1, 3],
+                        [3, 7, 4, 9, 2, 8, 5, 6, 1],
+                        [1, 8, 5, 7, 6, 3, 4, 2, 9],
+                        [9, 6, 2, 4, 1, 5, 3, 7, 8],
+                        [4, 9, 6, 1, 5, 7, 8, 3, 2],
+                        [2, 1, 8, 3, 9, 6, 7, 4, 5],
+                        [7, 5, 3, 2, 8, 4, 1, 9, 6]        
                     ]
-        sudokuSolver.find_solution(self._solvedBoard)
 
+        # Note: Add notes feature 
 
     def run(self):
  
 
         try:
-            # clock = pygame.time.Clock()
+
             self._create_surface((self._SCREEN_WIDTH, self._SCREEN_HEIGHT))
             
             
@@ -76,18 +81,20 @@ class SudokuGrid:
 
                 if(self._mouseClicked == True):
                     self._displayCurrentBox()
-                
-                
+  
 
                 self._draw_lines()
                 self._draw_nums()
                 self._handle_events()
-                # self._displayCurrentBox()
 
                 if(self._autoSolve == True):
-                    pass
+                    self._reset_board(self._board, self._og_board)
+                    if self._solve_board():
+                        self._acceptingClicks = True
+                        self._autoSolve = False
+                        self._backtrackingDone = True
                 
-                if self._done == True and self._autoSolve == False:
+                if self._done == True and self._backtrackingDone == False:
                     self._mark_win()
 
                 pygame.display.flip()
@@ -124,7 +131,7 @@ class SudokuGrid:
 
 
     def _mark_win(self):
-        pygame.draw.rect(self._surface, (124, 252, 0), (0,0,self._SCREEN_WIDTH, 34))
+        pygame.draw.rect(self._surface, (0, 255, 0), (0,0,self._SCREEN_WIDTH, 34))
         text = self._smaller_font.render("YOU WIN!!!", True, (255,0,0))
         self._surface.blit(text, (350, 0))
 
@@ -145,14 +152,35 @@ class SudokuGrid:
             for col in range(len(self._board[row])):
                 if(self._board[row][col] != 0 and self._og_board[row][col] == 0):
                     text = self._font.render(str(self._board[row][col]), True, (0,0,0))
-                    self._surface.blit(text, (col * self._seperation_distance + 34, row * self._seperation_distance + 20))
+                    self._surface.blit(text, (col * self._seperation_distance + 34, row * self._seperation_distance + 10))
                 elif(self._board[row][col] != 0 and self._og_board[row][col] != 0):
-                    if(self._once == False):
-                        print(self._board[row][col])
-                        self._once = True
                     text = self._font.render(str(self._board[row][col]), True, (0,0,255))
-                    self._surface.blit(text, (col * self._seperation_distance + 34, row * self._seperation_distance + 20))
+                    self._surface.blit(text, (col * self._seperation_distance + 34, row * self._seperation_distance + 10))
     
+
+
+    def _solve_board(self):
+        pygame.event.pump()
+        self._surface.fill((255,255,255))
+        self._draw_lines()
+        self._draw_nums()
+        empty_spot = sudokuSolver.findEmptySquare(self._board)
+        if(empty_spot[0] == "Complete"):
+            return True
+
+        for num in range(1, 10):
+            if (sudokuSolver.check_spot(self._board, empty_spot[0], empty_spot[1], num) == True):
+                self._board[empty_spot[0]][empty_spot[1]] = num
+
+                pygame.display.flip()
+
+                if (self._solve_board() == True):
+                    return True
+            self._board[empty_spot[0]][empty_spot[1]] = 0
+
+            pygame.display.flip()
+
+        return False
 
 
 
@@ -187,8 +215,10 @@ class SudokuGrid:
         if event.type == pygame.QUIT:
             self._stop_running()
         
+        
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            self._handleMouseButton()
+            if self._acceptingClicks:
+                self._handleMouseButton()
 
 
             
@@ -199,6 +229,7 @@ class SudokuGrid:
 
         
         self._mouseClicked = True
+        
         
        
 
@@ -259,7 +290,10 @@ class SudokuGrid:
 
         if keys[pygame.K_RETURN]:
             self._autoSolve = True
+            self._acceptingClicks = False
 
+        # if keys[pygame.K_q]:
+        #     self._board = self._solvedBoard
 
         if self._check_filled():
             self._check_win()
