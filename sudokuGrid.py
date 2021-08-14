@@ -152,10 +152,10 @@ class SudokuGrid:
             for col in range(len(self._board[row])):
                 if(self._board[row][col] != 0 and self._og_board[row][col] == 0):
                     text = self._font.render(str(self._board[row][col]), True, (0,0,0))
-                    self._surface.blit(text, (col * self._seperation_distance + 34, row * self._seperation_distance + 10))
+                    self._surface.blit(text, (col * self._seperation_distance + 33, row * self._seperation_distance + 10))
                 elif(self._board[row][col] != 0 and self._og_board[row][col] != 0):
                     text = self._font.render(str(self._board[row][col]), True, (0,0,255))
-                    self._surface.blit(text, (col * self._seperation_distance + 34, row * self._seperation_distance + 10))
+                    self._surface.blit(text, (col * self._seperation_distance + 33, row * self._seperation_distance + 10))
     
 
 
