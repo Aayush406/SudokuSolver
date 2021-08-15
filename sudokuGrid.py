@@ -2,7 +2,6 @@ import pygame
 import sudokuSolver
 
 
-_FRAME_RATE = 10
 pygame.init()
 pygame.font.init()
 
@@ -67,7 +66,9 @@ class SudokuGrid:
         # Note: Add notes feature 
 
     def run(self):
- 
+        '''
+        Runs the game until it is quit
+        '''
 
         try:
 
@@ -113,7 +114,9 @@ class SudokuGrid:
 
 
     def _check_win(self):
-
+        '''
+        Checks if the user has correctly solved the board
+        '''
         for row in range(len(self._board)):
             for col in range(len(self._board[0])):
                 if(self._board[row][col] != self._solvedBoard[row][col]):
@@ -123,6 +126,9 @@ class SudokuGrid:
         return 
 
     def _check_filled(self):
+        '''
+        Checks if the user has fully filled the board
+        '''
         for i in range(len(self._board)):
             for j in range(len(self._board[0])):
                 if(self._board[i][j] == 0):
@@ -131,12 +137,18 @@ class SudokuGrid:
 
 
     def _mark_win(self):
+        '''
+        Draws a Win message on the board
+        '''
         pygame.draw.rect(self._surface, (0, 255, 0), (0,0,self._SCREEN_WIDTH, 34))
         text = self._smaller_font.render("YOU WIN!!!", True, (255,0,0))
         self._surface.blit(text, (350, 0))
 
 
     def _draw_lines(self):
+        '''
+        Draws the lines on the board to resemble sudoku
+        '''
         for i in range(10):
             if(i % 3 == 0):
                 pygame.draw.line(self._surface, (0, 0, 0), (0, i*self._seperation_distance), (self._SCREEN_WIDTH, i * self._seperation_distance), 8)
@@ -148,6 +160,9 @@ class SudokuGrid:
             
 
     def _draw_nums(self):
+        '''
+        Draws the numbers on the board using the same offset distance for each square
+        '''
         for row in range(len(self._board)):
             for col in range(len(self._board[row])):
                 if(self._board[row][col] != 0 and self._og_board[row][col] == 0):
@@ -160,6 +175,9 @@ class SudokuGrid:
 
 
     def _solve_board(self):
+        '''
+        Solves the board using backtracking and displays the changes live
+        '''
         pygame.event.pump()
         self._surface.fill((255,255,255))
         self._draw_lines()
@@ -194,13 +212,16 @@ class SudokuGrid:
 
     
     def _stop_running(self) -> None:
+        '''
+        sets the boolean that runs the game to false
+        '''
         self._running = False
 
     
 
     def _handle_events(self) -> None:
         '''
-        Handles whether to quit or the resize the board
+        Handles whether to quit or handle the mouse click as well as call the keys pressed function
         '''
         for event in pygame.event.get():
             self._handle_event(event)
@@ -210,7 +231,7 @@ class SudokuGrid:
 
     def _handle_event(self, event) -> None:
         '''
-        Handles whether to quit or the resize the board
+        Handles whether to quit or handle the mouse click
         '''
         if event.type == pygame.QUIT:
             self._stop_running()
@@ -223,6 +244,10 @@ class SudokuGrid:
 
             
     def _handleMouseButton(self):
+        '''
+        Finds the position of a Mouse Click
+        '''
+
         self._mouseX, self._mouseY = pygame.mouse.get_pos()
         self._mouseX = self._mouseX // self._seperation_distance
         self._mouseY = self._mouseY // self._seperation_distance
