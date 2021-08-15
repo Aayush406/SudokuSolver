@@ -76,7 +76,6 @@ def find_solution(board):
         
 
 def check_spot(currBoard, currRow, currCol, num):
-    # print(str(currRow) + " " + str(currCol))
 
     for col in range(0, 9): # Check if the value is valid in the current Row
         if(col != currCol):
@@ -105,8 +104,6 @@ def findEmptySquare(currBoard): #Finds the next empty spot in the sudoku board a
     for row in range(9):
         for col in range(9):
             if(currBoard[row][col] == 0):
-                # print(currBoard[row][col])
-                # print("wtf")
                 return [row, col]
     return ["Complete"] # If the Board is complete
 

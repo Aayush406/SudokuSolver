@@ -190,7 +190,7 @@ class SudokuGrid:
         '''
 
         self._surface = pygame.display.set_mode(size)
-        pygame.display.set_caption("Sudoku Game")
+        pygame.display.set_caption("Sudoku Solver")
 
     
     def _stop_running(self) -> None:
