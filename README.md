@@ -10,7 +10,7 @@ If the user runs the solve command, then they are disqualifed from winning, but 
 
 Currently the only way to change the puzzle is the manually change the values in the board inside of the code.
 
-In the future, a puzzle creator or multiple sudoku puzzles will be added for the user to play.
+In the future, a puzzle creator or multiple sudoku puzzles will be added that the user to play.
 
 
 ### Run
